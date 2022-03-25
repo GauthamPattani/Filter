@@ -183,6 +183,57 @@ void FilterAudioProcessor::setStateInformation (const void* data, int sizeInByte
     // whose contents will have been created by the getStateInformation() call.
 }
 
+juce::AudioProcessorValueTreeState::ParameterLayout
+    FilterAudioProcessor::createParameterLayout()
+{
+    juce::AudioProcessorValueTreeState::ParameterLayout layout;
+    
+    layout.add(std::make_unique<juce::AudioParameterFloat>("Freq",
+                                                           "Freq",
+                                                           juce::NormalisableRange<float>(20.f,20000.f,1.f,1.f),
+                                                           1000.f));// Fiter Frequency Parameter
+    
+    juce::StringArray stringArray1;
+    stringArray1.add("High Pass");
+    stringArray1.add("Low Pass");
+   
+    layout.add(std::make_unique<juce::AudioParameterChoice>("HP/LP","HP/LP",stringArray1,0)); // Filter Type parameter
+    
+    juce::StringArray stringArray2;
+    stringArray2.add("Butterworth");
+    stringArray2.add("Linkwitz-Reily");
+   
+    layout.add(std::make_unique<juce::AudioParameterChoice>("Filter Type","Filter Type",stringArray2,0)); // Filter Id parameter
+    int choice = 1;
+    // juce:: AudioParameterChoice.getIndex(stringArray2) const;
+    
+    if (choice = 1)
+    {
+        juce::StringArray stringArray3;
+        for (int i = 0; i < 8 ; ++i)
+        {
+            juce::String str;
+            str << (6 + i*6);
+            str <<"dB/Oct";
+            stringArray3.add(str);
+        }
+    }
+    
+    if (choice = 2)
+    {
+        juce::StringArray stringArray4;
+        for (int i = 0; i < 8 ; i+=2)
+        {
+            juce::String str;
+            str << (12 + i*6);
+            str <<"dB/Oct";
+            stringArray4.add(str);
+        }
+    }
+    
+    return layout;
+}
+
 //==============================================================================
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
