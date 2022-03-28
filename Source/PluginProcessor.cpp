@@ -132,7 +132,6 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
     rightFilter.setBypassed<6>(true);
     rightFilter.setBypassed<7>(true);
 
-//    std::cout << chainSettings.type;
 
     if (chainSettings.type == 0)
     {
@@ -159,8 +158,6 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
             leftFilter.setBypassed<0>(false);
             *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
             leftFilter.setBypassed<1>(false);
-//            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
-//            leftFilter.setBypassed<2>(false);
 
         break;
         }
@@ -180,10 +177,6 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
             leftFilter.setBypassed<1>(false);
             *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
             leftFilter.setBypassed<2>(false);
-//            *leftFilter.get<3>().coefficients = *highPassCoefficients[3];
-//            leftFilter.setBypassed<3>(false);
-//            *leftFilter.get<4>().coefficients = *highPassCoefficients[4];
-//            leftFilter.setBypassed<4>(false);
 
         break;
         }
@@ -207,12 +200,7 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
             leftFilter.setBypassed<2>(false);
             *leftFilter.get<3>().coefficients = *highPassCoefficients[3];
             leftFilter.setBypassed<3>(false);
-//            *leftFilter.get<4>().coefficients = *highPassCoefficients[4];
-//            leftFilter.setBypassed<4>(false);
-//            *leftFilter.get<5>().coefficients = *highPassCoefficients[5];
-//            leftFilter.setBypassed<5>(false);
-//            *leftFilter.get<6>().coefficients = *highPassCoefficients[6];
-//            leftFilter.setBypassed<6>(false);
+
 
         break;
         }
@@ -252,8 +240,7 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
              rightFilter.setBypassed<0>(false);
             *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
              rightFilter.setBypassed<1>(false);
-//            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
-//             rightFilter.setBypassed<2>(false);
+
 
         break;
         }
@@ -273,10 +260,6 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
              rightFilter.setBypassed<1>(false);
             *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
              rightFilter.setBypassed<2>(false);
-//            *rightFilter.get<3>().coefficients = *highPassCoefficients[3];
-//             rightFilter.setBypassed<3>(false);
-//            *rightFilter.get<4>().coefficients = *highPassCoefficients[4];
-//             rightFilter.setBypassed<4>(false);
 
         break;
         }
@@ -299,12 +282,7 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
              rightFilter.setBypassed<2>(false);
             *rightFilter.get<3>().coefficients = *highPassCoefficients[3];
              rightFilter.setBypassed<3>(false);
-//            *rightFilter.get<4>().coefficients = *highPassCoefficients[4];
-//             rightFilter.setBypassed<4>(false);
-////            *rightFilter.get<5>().coefficients = *highPassCoefficients[5];
-////             rightFilter.setBypassed<5>(false);
-////            *rightFilter.get<6>().coefficients = *highPassCoefficients[6];
-////             rightFilter.setBypassed<6>(false);
+
 
         break;
         }
@@ -347,8 +325,7 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
                 leftFilter.setBypassed<0>(false);
                 *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
                 leftFilter.setBypassed<1>(false);
-//                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
-//                leftFilter.setBypassed<2>(false);
+
 
             break;
             }
@@ -367,10 +344,6 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
                 leftFilter.setBypassed<1>(false);
                 *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
                 leftFilter.setBypassed<2>(false);
-//                *leftFilter.get<3>().coefficients = *lowPassCoefficients[3];
-//                leftFilter.setBypassed<3>(false);
-//                *leftFilter.get<4>().coefficients = *lowPassCoefficients[4];
-//                leftFilter.setBypassed<4>(false);
 
             break;
             }
@@ -392,12 +365,6 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
                 leftFilter.setBypassed<2>(false);
                 *leftFilter.get<3>().coefficients = *lowPassCoefficients[3];
                 leftFilter.setBypassed<3>(false);
-//                *leftFilter.get<4>().coefficients = *lowPassCoefficients[4];
-//                leftFilter.setBypassed<4>(false);
-//                *leftFilter.get<5>().coefficients = *lowPassCoefficients[5];
-//                leftFilter.setBypassed<5>(false);
-//                *leftFilter.get<6>().coefficients = *lowPassCoefficients[6];
-//                leftFilter.setBypassed<6>(false);
 
             break;
             }
@@ -438,8 +405,7 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
                  rightFilter.setBypassed<0>(false);
                 *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
                  rightFilter.setBypassed<1>(false);
-//                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
-//                 rightFilter.setBypassed<2>(false);
+
 
             break;
             }
@@ -458,10 +424,7 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
                  rightFilter.setBypassed<1>(false);
                 *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
                  rightFilter.setBypassed<2>(false);
-//                *rightFilter.get<3>().coefficients = *lowPassCoefficients[3];
-//                 rightFilter.setBypassed<3>(false);
-//                *rightFilter.get<4>().coefficients = *lowPassCoefficients[4];
-//                 rightFilter.setBypassed<4>(false);
+
 
             break;
             }
@@ -485,12 +448,7 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
                  rightFilter.setBypassed<2>(false);
                 *rightFilter.get<3>().coefficients = *lowPassCoefficients[3];
                  rightFilter.setBypassed<3>(false);
-//                *rightFilter.get<4>().coefficients = *lowPassCoefficients[4];
-//                 rightFilter.setBypassed<4>(false);
-//                *rightFilter.get<5>().coefficients = *lowPassCoefficients[5];
-//                 rightFilter.setBypassed<5>(false);
-//                *rightFilter.get<6>().coefficients = *lowPassCoefficients[6];
-//                 rightFilter.setBypassed<6>(false);
+
 
             break;
             }
@@ -558,16 +516,19 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     
     auto chainSettings = getChainSettings(apvts);
 
-    auto highPassCoefficients = juce::dsp::FilterDesign<float>::designIIRHighpassHighOrderButterworthMethod(chainSettings.freq,
+    auto highPassCoefficients = (juce::dsp::FilterDesign<float>::designIIRHighpassHighOrderButterworthMethod(chainSettings.freq,
                                                                                                         getSampleRate(),
-                                                                                                        (chainSettings.slope + 1));
-
+                                                                                                        (chainSettings.slope + 1)));
+    
+    
 
 
 
    auto lowPassCoefficients = juce::dsp::FilterDesign<float>::designIIRLowpassHighOrderButterworthMethod(chainSettings.freq,
                                                                                                             getSampleRate(),
                                                                                                             (chainSettings.slope + 1));
+    
+    
 
     auto& leftFilter = leftChain.get<ChainPositions::MyFilter>();
 
@@ -638,10 +599,7 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             leftFilter.setBypassed<1>(false);
             *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
             leftFilter.setBypassed<2>(false);
-//            *leftFilter.get<3>().coefficients = *highPassCoefficients[3];
-//            leftFilter.setBypassed<3>(false);
-//            *leftFilter.get<4>().coefficients = *highPassCoefficients[4];
-//            leftFilter.setBypassed<4>(false);
+
 
         break;
         }
@@ -665,12 +623,7 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             leftFilter.setBypassed<2>(false);
             *leftFilter.get<3>().coefficients = *highPassCoefficients[3];
             leftFilter.setBypassed<3>(false);
-//            *leftFilter.get<4>().coefficients = *highPassCoefficients[4];
-//            leftFilter.setBypassed<4>(false);
-//            *leftFilter.get<5>().coefficients = *highPassCoefficients[5];
-//            leftFilter.setBypassed<5>(false);
-//            *leftFilter.get<6>().coefficients = *highPassCoefficients[6];
-//            leftFilter.setBypassed<6>(false);
+
 
         break;
         }
@@ -710,8 +663,7 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
              rightFilter.setBypassed<0>(false);
             *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
              rightFilter.setBypassed<1>(false);
-//            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
-//             rightFilter.setBypassed<2>(false);
+
 
         break;
         }
@@ -731,10 +683,7 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
              rightFilter.setBypassed<1>(false);
             *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
              rightFilter.setBypassed<2>(false);
-//            *rightFilter.get<3>().coefficients = *highPassCoefficients[3];
-//             rightFilter.setBypassed<3>(false);
-//            *rightFilter.get<4>().coefficients = *highPassCoefficients[4];
-//             rightFilter.setBypassed<4>(false);
+
 
         break;
         }
@@ -757,12 +706,7 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
              rightFilter.setBypassed<2>(false);
             *rightFilter.get<3>().coefficients = *highPassCoefficients[3];
              rightFilter.setBypassed<3>(false);
-//            *rightFilter.get<4>().coefficients = *highPassCoefficients[4];
-//             rightFilter.setBypassed<4>(false);
-////            *rightFilter.get<5>().coefficients = *highPassCoefficients[5];
-////             rightFilter.setBypassed<5>(false);
-////            *rightFilter.get<6>().coefficients = *highPassCoefficients[6];
-////             rightFilter.setBypassed<6>(false);
+
 
         break;
         }
@@ -805,8 +749,6 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
                 leftFilter.setBypassed<0>(false);
                 *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
                 leftFilter.setBypassed<1>(false);
-//                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
-//                leftFilter.setBypassed<2>(false);
 
             break;
             }
@@ -825,10 +767,7 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
                 leftFilter.setBypassed<1>(false);
                 *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
                 leftFilter.setBypassed<2>(false);
-//                *leftFilter.get<3>().coefficients = *lowPassCoefficients[3];
-//                leftFilter.setBypassed<3>(false);
-//                *leftFilter.get<4>().coefficients = *lowPassCoefficients[4];
-//                leftFilter.setBypassed<4>(false);
+
 
             break;
             }
@@ -850,12 +789,6 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
                 leftFilter.setBypassed<2>(false);
                 *leftFilter.get<3>().coefficients = *lowPassCoefficients[3];
                 leftFilter.setBypassed<3>(false);
-//                *leftFilter.get<4>().coefficients = *lowPassCoefficients[4];
-//                leftFilter.setBypassed<4>(false);
-//                *leftFilter.get<5>().coefficients = *lowPassCoefficients[5];
-//                leftFilter.setBypassed<5>(false);
-//                *leftFilter.get<6>().coefficients = *lowPassCoefficients[6];
-//                leftFilter.setBypassed<6>(false);
 
             break;
             }
@@ -896,8 +829,6 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
                  rightFilter.setBypassed<0>(false);
                 *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
                  rightFilter.setBypassed<1>(false);
-//                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
-//                 rightFilter.setBypassed<2>(false);
 
             break;
             }
@@ -916,10 +847,7 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
                  rightFilter.setBypassed<1>(false);
                 *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
                  rightFilter.setBypassed<2>(false);
-//                *rightFilter.get<3>().coefficients = *lowPassCoefficients[3];
-//                 rightFilter.setBypassed<3>(false);
-//                *rightFilter.get<4>().coefficients = *lowPassCoefficients[4];
-//                 rightFilter.setBypassed<4>(false);
+
 
             break;
             }
@@ -943,12 +871,7 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
                  rightFilter.setBypassed<2>(false);
                 *rightFilter.get<3>().coefficients = *lowPassCoefficients[3];
                  rightFilter.setBypassed<3>(false);
-//                *rightFilter.get<4>().coefficients = *lowPassCoefficients[4];
-//                 rightFilter.setBypassed<4>(false);
-//                *rightFilter.get<5>().coefficients = *lowPassCoefficients[5];
-//                 rightFilter.setBypassed<5>(false);
-//                *rightFilter.get<6>().coefficients = *lowPassCoefficients[6];
-//                 rightFilter.setBypassed<6>(false);
+
 
             break;
             }

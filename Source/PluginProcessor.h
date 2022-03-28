@@ -83,7 +83,7 @@ private:
     
     using Filter = juce::dsp::IIR::Filter<float>;
     
-    using PassFilter = juce::dsp::ProcessorChain<Filter,Filter,Filter,Filter,Filter,Filter,Filter,Filter>;
+    using PassFilter = juce::dsp::ProcessorChain<Filter,Filter,Filter,Filter>;
     
     using MonoChain = juce::dsp::ProcessorChain<PassFilter>;
     
