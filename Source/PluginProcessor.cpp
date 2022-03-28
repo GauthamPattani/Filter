@@ -100,8 +100,415 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
     
     leftChain.prepare(spec);
     rightChain.prepare(spec);
-}
+    
+    auto chainSettings = getChainSettings(apvts);
+    auto highPassCoefficients = juce::dsp::FilterDesign<float>::designIIRHighpassHighOrderButterworthMethod(chainSettings.freq,
+                                                                                                        sampleRate,
+                                                                                                        (chainSettings.slope + 1));
 
+   auto lowPassCoefficients = juce::dsp::FilterDesign<float>::designIIRLowpassHighOrderButterworthMethod(chainSettings.freq,
+                                                                                                            sampleRate,
+                                                                                                            (chainSettings.slope + 1));
+//
+    auto& leftFilter = leftChain.get<ChainPositions::MyFilter>();
+
+    leftFilter.setBypassed<0>(true);
+    leftFilter.setBypassed<1>(true);
+    leftFilter.setBypassed<2>(true);
+    leftFilter.setBypassed<3>(true);
+    leftFilter.setBypassed<4>(true);
+    leftFilter.setBypassed<5>(true);
+    leftFilter.setBypassed<6>(true);
+    leftFilter.setBypassed<7>(true);
+
+    auto& rightFilter = rightChain.get<ChainPositions::MyFilter>();
+
+    rightFilter.setBypassed<0>(true);
+    rightFilter.setBypassed<1>(true);
+    rightFilter.setBypassed<2>(true);
+    rightFilter.setBypassed<3>(true);
+    rightFilter.setBypassed<4>(true);
+    rightFilter.setBypassed<5>(true);
+    rightFilter.setBypassed<6>(true);
+    rightFilter.setBypassed<7>(true);
+
+//    std::cout << chainSettings.type;
+
+    if (chainSettings.type == 0)
+    {
+
+    switch (chainSettings.slope)
+    {
+        case Slope_6:
+        {
+            *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+        break;
+        }
+
+        case Slope_12:
+        {
+            *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            
+
+        break;
+        }
+        case Slope_18:
+        {   *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+//            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
+//            leftFilter.setBypassed<2>(false);
+
+        break;
+        }
+        case Slope_24:
+        {   *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+
+
+        break;
+        }
+        case Slope_30:
+        {   *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
+            leftFilter.setBypassed<2>(false);
+//            *leftFilter.get<3>().coefficients = *highPassCoefficients[3];
+//            leftFilter.setBypassed<3>(false);
+//            *leftFilter.get<4>().coefficients = *highPassCoefficients[4];
+//            leftFilter.setBypassed<4>(false);
+
+        break;
+        }
+        case Slope_36:
+        {   *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
+            leftFilter.setBypassed<2>(false);
+
+
+        break;
+        }
+        case Slope_42:
+        {   *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
+            leftFilter.setBypassed<2>(false);
+            *leftFilter.get<3>().coefficients = *highPassCoefficients[3];
+            leftFilter.setBypassed<3>(false);
+//            *leftFilter.get<4>().coefficients = *highPassCoefficients[4];
+//            leftFilter.setBypassed<4>(false);
+//            *leftFilter.get<5>().coefficients = *highPassCoefficients[5];
+//            leftFilter.setBypassed<5>(false);
+//            *leftFilter.get<6>().coefficients = *highPassCoefficients[6];
+//            leftFilter.setBypassed<6>(false);
+
+        break;
+        }
+        case Slope_48:
+        { *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
+            leftFilter.setBypassed<2>(false);
+            *leftFilter.get<3>().coefficients = *highPassCoefficients[3];
+            leftFilter.setBypassed<3>(false);
+
+        break;
+        }
+            }
+
+
+    switch (chainSettings.slope)
+    {
+        case Slope_6:
+        {
+            *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+        break;
+        }
+
+        case Slope_12:
+        {
+            *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+
+        break;
+        }
+        case Slope_18:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+//            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
+//             rightFilter.setBypassed<2>(false);
+
+        break;
+        }
+        case Slope_24:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+
+
+        break;
+        }
+        case Slope_30:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
+             rightFilter.setBypassed<2>(false);
+//            *rightFilter.get<3>().coefficients = *highPassCoefficients[3];
+//             rightFilter.setBypassed<3>(false);
+//            *rightFilter.get<4>().coefficients = *highPassCoefficients[4];
+//             rightFilter.setBypassed<4>(false);
+
+        break;
+        }
+        case Slope_36:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
+             rightFilter.setBypassed<2>(false);
+
+        break;
+        }
+        case Slope_42:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
+             rightFilter.setBypassed<2>(false);
+            *rightFilter.get<3>().coefficients = *highPassCoefficients[3];
+             rightFilter.setBypassed<3>(false);
+//            *rightFilter.get<4>().coefficients = *highPassCoefficients[4];
+//             rightFilter.setBypassed<4>(false);
+////            *rightFilter.get<5>().coefficients = *highPassCoefficients[5];
+////             rightFilter.setBypassed<5>(false);
+////            *rightFilter.get<6>().coefficients = *highPassCoefficients[6];
+////             rightFilter.setBypassed<6>(false);
+
+        break;
+        }
+        case Slope_48:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
+             rightFilter.setBypassed<2>(false);
+            *rightFilter.get<3>().coefficients = *highPassCoefficients[3];
+             rightFilter.setBypassed<3>(false);
+
+
+        break;
+        }
+            }
+    }
+
+    else if (chainSettings.type == 1)
+    {
+        switch (chainSettings.slope)
+        {
+            case Slope_6:
+            {
+                *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+            break;
+            }
+
+            case Slope_12:
+            {
+                *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+
+            break;
+            }
+            case Slope_18:
+            {   *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+//                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
+//                leftFilter.setBypassed<2>(false);
+
+            break;
+            }
+            case Slope_24:
+            {   *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+
+            break;
+            }
+            case Slope_30:
+            {   *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                leftFilter.setBypassed<2>(false);
+//                *leftFilter.get<3>().coefficients = *lowPassCoefficients[3];
+//                leftFilter.setBypassed<3>(false);
+//                *leftFilter.get<4>().coefficients = *lowPassCoefficients[4];
+//                leftFilter.setBypassed<4>(false);
+
+            break;
+            }
+            case Slope_36:
+            {   *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
+
+            break;
+            }
+            case Slope_42:
+            {   *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                leftFilter.setBypassed<2>(false);
+                *leftFilter.get<3>().coefficients = *lowPassCoefficients[3];
+                leftFilter.setBypassed<3>(false);
+//                *leftFilter.get<4>().coefficients = *lowPassCoefficients[4];
+//                leftFilter.setBypassed<4>(false);
+//                *leftFilter.get<5>().coefficients = *lowPassCoefficients[5];
+//                leftFilter.setBypassed<5>(false);
+//                *leftFilter.get<6>().coefficients = *lowPassCoefficients[6];
+//                leftFilter.setBypassed<6>(false);
+
+            break;
+            }
+            case Slope_48:
+            { *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                leftFilter.setBypassed<2>(false);
+                *leftFilter.get<3>().coefficients = *lowPassCoefficients[3];
+                leftFilter.setBypassed<3>(false);
+
+            break;
+            }
+                }
+
+
+        switch (chainSettings.slope)
+        {
+            case Slope_6:
+            {
+                *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+            break;
+            }
+
+            case Slope_12:
+            {
+                *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+
+
+            break;
+            }
+            case Slope_18:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+//                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
+//                 rightFilter.setBypassed<2>(false);
+
+            break;
+            }
+            case Slope_24:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+
+            break;
+            }
+            case Slope_30:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                 rightFilter.setBypassed<2>(false);
+//                *rightFilter.get<3>().coefficients = *lowPassCoefficients[3];
+//                 rightFilter.setBypassed<3>(false);
+//                *rightFilter.get<4>().coefficients = *lowPassCoefficients[4];
+//                 rightFilter.setBypassed<4>(false);
+
+            break;
+            }
+            case Slope_36:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                 rightFilter.setBypassed<2>(false);
+
+
+            break;
+            }
+            case Slope_42:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                 rightFilter.setBypassed<2>(false);
+                *rightFilter.get<3>().coefficients = *lowPassCoefficients[3];
+                 rightFilter.setBypassed<3>(false);
+//                *rightFilter.get<4>().coefficients = *lowPassCoefficients[4];
+//                 rightFilter.setBypassed<4>(false);
+//                *rightFilter.get<5>().coefficients = *lowPassCoefficients[5];
+//                 rightFilter.setBypassed<5>(false);
+//                *rightFilter.get<6>().coefficients = *lowPassCoefficients[6];
+//                 rightFilter.setBypassed<6>(false);
+
+            break;
+            }
+            case Slope_48:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                 rightFilter.setBypassed<2>(false);
+                *rightFilter.get<3>().coefficients = *lowPassCoefficients[3];
+                 rightFilter.setBypassed<3>(false);
+
+                break;
+            }
+        }
+    }
+}
 void FilterAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
@@ -149,6 +556,417 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
+    auto chainSettings = getChainSettings(apvts);
+
+    auto highPassCoefficients = juce::dsp::FilterDesign<float>::designIIRHighpassHighOrderButterworthMethod(chainSettings.freq,
+                                                                                                        getSampleRate(),
+                                                                                                        (chainSettings.slope + 1));
+
+
+
+
+   auto lowPassCoefficients = juce::dsp::FilterDesign<float>::designIIRLowpassHighOrderButterworthMethod(chainSettings.freq,
+                                                                                                            getSampleRate(),
+                                                                                                            (chainSettings.slope + 1));
+
+    auto& leftFilter = leftChain.get<ChainPositions::MyFilter>();
+
+    leftFilter.setBypassed<0>(true);
+    leftFilter.setBypassed<1>(true);
+    leftFilter.setBypassed<2>(true);
+    leftFilter.setBypassed<3>(true);
+    leftFilter.setBypassed<4>(true);
+    leftFilter.setBypassed<5>(true);
+    leftFilter.setBypassed<6>(true);
+    leftFilter.setBypassed<7>(true);
+
+    auto& rightFilter = rightChain.get<ChainPositions::MyFilter>();
+
+    rightFilter.setBypassed<0>(true);
+    rightFilter.setBypassed<1>(true);
+    rightFilter.setBypassed<2>(true);
+    rightFilter.setBypassed<3>(true);
+    rightFilter.setBypassed<4>(true);
+    rightFilter.setBypassed<5>(true);
+    rightFilter.setBypassed<6>(true);
+    rightFilter.setBypassed<7>(true);
+
+   
+    if (chainSettings.type == 0)
+    {
+
+    switch (chainSettings.slope)
+    {
+        case Slope_6:
+        {
+            *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+        break;
+        }
+
+        case Slope_12:
+        {
+            *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            
+
+        break;
+        }
+        case Slope_18:
+        {   *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+//            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
+//            leftFilter.setBypassed<2>(false);
+
+        break;
+        }
+        case Slope_24:
+        {   *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+
+
+        break;
+        }
+        case Slope_30:
+        {   *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
+            leftFilter.setBypassed<2>(false);
+//            *leftFilter.get<3>().coefficients = *highPassCoefficients[3];
+//            leftFilter.setBypassed<3>(false);
+//            *leftFilter.get<4>().coefficients = *highPassCoefficients[4];
+//            leftFilter.setBypassed<4>(false);
+
+        break;
+        }
+        case Slope_36:
+        {   *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
+            leftFilter.setBypassed<2>(false);
+
+
+        break;
+        }
+        case Slope_42:
+        {   *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
+            leftFilter.setBypassed<2>(false);
+            *leftFilter.get<3>().coefficients = *highPassCoefficients[3];
+            leftFilter.setBypassed<3>(false);
+//            *leftFilter.get<4>().coefficients = *highPassCoefficients[4];
+//            leftFilter.setBypassed<4>(false);
+//            *leftFilter.get<5>().coefficients = *highPassCoefficients[5];
+//            leftFilter.setBypassed<5>(false);
+//            *leftFilter.get<6>().coefficients = *highPassCoefficients[6];
+//            leftFilter.setBypassed<6>(false);
+
+        break;
+        }
+        case Slope_48:
+        { *leftFilter.get<0>().coefficients = *highPassCoefficients[0];
+            leftFilter.setBypassed<0>(false);
+            *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
+            leftFilter.setBypassed<1>(false);
+            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
+            leftFilter.setBypassed<2>(false);
+            *leftFilter.get<3>().coefficients = *highPassCoefficients[3];
+            leftFilter.setBypassed<3>(false);
+
+        break;
+        }
+            }
+
+
+    switch (chainSettings.slope)
+    {
+        case Slope_6:
+        {
+            *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+        break;
+        }
+
+        case Slope_12:
+        {
+            *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+
+        break;
+        }
+        case Slope_18:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+//            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
+//             rightFilter.setBypassed<2>(false);
+
+        break;
+        }
+        case Slope_24:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+
+
+        break;
+        }
+        case Slope_30:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
+             rightFilter.setBypassed<2>(false);
+//            *rightFilter.get<3>().coefficients = *highPassCoefficients[3];
+//             rightFilter.setBypassed<3>(false);
+//            *rightFilter.get<4>().coefficients = *highPassCoefficients[4];
+//             rightFilter.setBypassed<4>(false);
+
+        break;
+        }
+        case Slope_36:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
+             rightFilter.setBypassed<2>(false);
+
+        break;
+        }
+        case Slope_42:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
+             rightFilter.setBypassed<2>(false);
+            *rightFilter.get<3>().coefficients = *highPassCoefficients[3];
+             rightFilter.setBypassed<3>(false);
+//            *rightFilter.get<4>().coefficients = *highPassCoefficients[4];
+//             rightFilter.setBypassed<4>(false);
+////            *rightFilter.get<5>().coefficients = *highPassCoefficients[5];
+////             rightFilter.setBypassed<5>(false);
+////            *rightFilter.get<6>().coefficients = *highPassCoefficients[6];
+////             rightFilter.setBypassed<6>(false);
+
+        break;
+        }
+        case Slope_48:
+        {   *rightFilter.get<0>().coefficients = *highPassCoefficients[0];
+             rightFilter.setBypassed<0>(false);
+            *rightFilter.get<1>().coefficients = *highPassCoefficients[1];
+             rightFilter.setBypassed<1>(false);
+            *rightFilter.get<2>().coefficients = *highPassCoefficients[2];
+             rightFilter.setBypassed<2>(false);
+            *rightFilter.get<3>().coefficients = *highPassCoefficients[3];
+             rightFilter.setBypassed<3>(false);
+
+
+        break;
+        }
+            }
+    }
+
+    else if (chainSettings.type == 1)
+    {
+        switch (chainSettings.slope)
+        {
+            case Slope_6:
+            {
+                *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+            break;
+            }
+
+            case Slope_12:
+            {
+                *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+
+            break;
+            }
+            case Slope_18:
+            {   *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+//                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
+//                leftFilter.setBypassed<2>(false);
+
+            break;
+            }
+            case Slope_24:
+            {   *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+
+            break;
+            }
+            case Slope_30:
+            {   *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                leftFilter.setBypassed<2>(false);
+//                *leftFilter.get<3>().coefficients = *lowPassCoefficients[3];
+//                leftFilter.setBypassed<3>(false);
+//                *leftFilter.get<4>().coefficients = *lowPassCoefficients[4];
+//                leftFilter.setBypassed<4>(false);
+
+            break;
+            }
+            case Slope_36:
+            {   *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
+
+            break;
+            }
+            case Slope_42:
+            {   *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                leftFilter.setBypassed<2>(false);
+                *leftFilter.get<3>().coefficients = *lowPassCoefficients[3];
+                leftFilter.setBypassed<3>(false);
+//                *leftFilter.get<4>().coefficients = *lowPassCoefficients[4];
+//                leftFilter.setBypassed<4>(false);
+//                *leftFilter.get<5>().coefficients = *lowPassCoefficients[5];
+//                leftFilter.setBypassed<5>(false);
+//                *leftFilter.get<6>().coefficients = *lowPassCoefficients[6];
+//                leftFilter.setBypassed<6>(false);
+
+            break;
+            }
+            case Slope_48:
+            { *leftFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                leftFilter.setBypassed<0>(false);
+                *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                leftFilter.setBypassed<1>(false);
+                *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                leftFilter.setBypassed<2>(false);
+                *leftFilter.get<3>().coefficients = *lowPassCoefficients[3];
+                leftFilter.setBypassed<3>(false);
+
+            break;
+            }
+                }
+
+
+        switch (chainSettings.slope)
+        {
+            case Slope_6:
+            {
+                *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+            break;
+            }
+
+            case Slope_12:
+            {
+                *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+
+
+            break;
+            }
+            case Slope_18:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+//                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
+//                 rightFilter.setBypassed<2>(false);
+
+            break;
+            }
+            case Slope_24:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+
+            break;
+            }
+            case Slope_30:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                 rightFilter.setBypassed<2>(false);
+//                *rightFilter.get<3>().coefficients = *lowPassCoefficients[3];
+//                 rightFilter.setBypassed<3>(false);
+//                *rightFilter.get<4>().coefficients = *lowPassCoefficients[4];
+//                 rightFilter.setBypassed<4>(false);
+
+            break;
+            }
+            case Slope_36:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                 rightFilter.setBypassed<2>(false);
+
+
+            break;
+            }
+            case Slope_42:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                 rightFilter.setBypassed<2>(false);
+                *rightFilter.get<3>().coefficients = *lowPassCoefficients[3];
+                 rightFilter.setBypassed<3>(false);
+//                *rightFilter.get<4>().coefficients = *lowPassCoefficients[4];
+//                 rightFilter.setBypassed<4>(false);
+//                *rightFilter.get<5>().coefficients = *lowPassCoefficients[5];
+//                 rightFilter.setBypassed<5>(false);
+//                *rightFilter.get<6>().coefficients = *lowPassCoefficients[6];
+//                 rightFilter.setBypassed<6>(false);
+
+            break;
+            }
+            case Slope_48:
+            {   *rightFilter.get<0>().coefficients = *lowPassCoefficients[0];
+                 rightFilter.setBypassed<0>(false);
+                *rightFilter.get<1>().coefficients = *lowPassCoefficients[1];
+                 rightFilter.setBypassed<1>(false);
+                *rightFilter.get<2>().coefficients = *lowPassCoefficients[2];
+                 rightFilter.setBypassed<2>(false);
+                *rightFilter.get<3>().coefficients = *lowPassCoefficients[3];
+                 rightFilter.setBypassed<3>(false);
+
+                break;
+            }
+        }
+    }
+    
     juce::dsp::AudioBlock<float> block(buffer);
     
     auto leftBlock = block.getSingleChannelBlock(0);
@@ -188,6 +1006,16 @@ void FilterAudioProcessor::setStateInformation (const void* data, int sizeInByte
     // whose contents will have been created by the getStateInformation() call.
 }
 
+ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts)
+{
+    ChainSettings settings;
+    
+   settings.freq = apvts.getRawParameterValue("Freq") ->load();
+   settings.type = apvts.getRawParameterValue("HP/LP") ->load();
+   settings.slope = static_cast<Slope>(apvts.getRawParameterValue("Filter Slope") ->load());
+    return settings;
+}
+
 juce::AudioProcessorValueTreeState::ParameterLayout
     FilterAudioProcessor::createParameterLayout()
 {
@@ -204,21 +1032,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout
    
     layout.add(std::make_unique<juce::AudioParameterChoice>("HP/LP","HP/LP",stringArray1,0)); // Filter Type parameter
     
-//    juce::StringArray stringArray2;
-//    stringArray2.add("Butterworth");
-//    stringArray2.add("Linkwitz-Reily");
-//
-//
-//
-//    layout.add(std::make_unique<juce::AudioParameterChoice>("Filter Type","Filter Type",stringArray2,0)); // Filter Id parameter
-//
-//    juce::AudioParameterChoice choice;
-//    choice.getIndex("Filter Type")
 
 
     juce::StringArray stringArray3;
 
-//    while (choice == 0)
     {
 
         for (int i = 0; i < 8 ; ++i)
@@ -230,18 +1047,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout
         }
 
     }
-//    while (choice == 1)
-//    {
-//
-//        for (int i = 0; i < 8 ; i+=2)
-//        {
-//            juce::String str;
-//            str << (12 + i*6);
-//            str <<"dB/Oct";
-//            stringArray3.add(str);
-//        }
-//
-//    }
 
     layout.add(std::make_unique<juce::AudioParameterChoice>("Filter Slope","Filter Slope",stringArray3,0));
     return layout;

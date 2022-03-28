@@ -10,6 +10,27 @@
 
 #include <JuceHeader.h>
 
+enum Slope
+{
+   Slope_6,
+    Slope_12,
+    Slope_18,
+    Slope_24,
+    Slope_30,
+    Slope_36,
+    Slope_42,
+    Slope_48
+};
+
+struct ChainSettings
+{
+    float freq {0};
+    Slope slope{Slope::Slope_6};
+    int type {0};
+};
+
+ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts);
+
 //==============================================================================
 /**
 */
@@ -53,7 +74,7 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     
-   juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+  static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     
     
     juce::AudioProcessorValueTreeState apvts {*this,nullptr,"Parameters",createParameterLayout()};
@@ -67,6 +88,11 @@ private:
     using MonoChain = juce::dsp::ProcessorChain<PassFilter>;
     
     MonoChain leftChain, rightChain;
+    
+    enum ChainPositions
+    {
+        MyFilter
+    };
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FilterAudioProcessor)
