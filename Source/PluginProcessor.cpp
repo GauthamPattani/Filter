@@ -93,8 +93,13 @@ void FilterAudioProcessor::changeProgramName (int index, const juce::String& new
 //==============================================================================
 void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    juce::dsp::ProcessSpec spec;
+    spec.maximumBlockSize =samplesPerBlock;
+    spec.numChannels = 1;
+    spec.sampleRate = sampleRate;
+    
+    leftChain.prepare(spec);
+    rightChain.prepare(spec);
 }
 
 void FilterAudioProcessor::releaseResources()
@@ -143,19 +148,18 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     // this code if your algorithm always overwrites all the output channels.
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
+    
+    juce::dsp::AudioBlock<float> block(buffer);
+    
+    auto leftBlock = block.getSingleChannelBlock(0);
+    auto rightBlock = block.getSingleChannelBlock(1);
+    
+    juce::dsp::ProcessContextReplacing<float> leftContext(leftBlock);
+    juce::dsp::ProcessContextReplacing<float> rightContext(rightBlock);
+    
+    leftChain.process(leftContext);
+    rightChain.process(rightContext);
 
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
-    }
 }
 
 //==============================================================================
@@ -166,7 +170,8 @@ bool FilterAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* FilterAudioProcessor::createEditor()
 {
-    return new FilterAudioProcessorEditor (*this);
+//    return new FilterAudioProcessorEditor (*this);
+    return new juce::GenericAudioProcessorEditor(*this);
 }
 
 //==============================================================================
@@ -199,17 +204,23 @@ juce::AudioProcessorValueTreeState::ParameterLayout
    
     layout.add(std::make_unique<juce::AudioParameterChoice>("HP/LP","HP/LP",stringArray1,0)); // Filter Type parameter
     
-    juce::StringArray stringArray2;
-    stringArray2.add("Butterworth");
-    stringArray2.add("Linkwitz-Reily");
-   
-    layout.add(std::make_unique<juce::AudioParameterChoice>("Filter Type","Filter Type",stringArray2,0)); // Filter Id parameter
-    int choice = 1;
-    // juce:: AudioParameterChoice.getIndex(stringArray2) const;
-    
-    if (choice = 1)
+//    juce::StringArray stringArray2;
+//    stringArray2.add("Butterworth");
+//    stringArray2.add("Linkwitz-Reily");
+//
+//
+//
+//    layout.add(std::make_unique<juce::AudioParameterChoice>("Filter Type","Filter Type",stringArray2,0)); // Filter Id parameter
+//
+//    juce::AudioParameterChoice choice;
+//    choice.getIndex("Filter Type")
+
+
+    juce::StringArray stringArray3;
+
+//    while (choice == 0)
     {
-        juce::StringArray stringArray3;
+
         for (int i = 0; i < 8 ; ++i)
         {
             juce::String str;
@@ -217,20 +228,22 @@ juce::AudioProcessorValueTreeState::ParameterLayout
             str <<"dB/Oct";
             stringArray3.add(str);
         }
+
     }
-    
-    if (choice = 2)
-    {
-        juce::StringArray stringArray4;
-        for (int i = 0; i < 8 ; i+=2)
-        {
-            juce::String str;
-            str << (12 + i*6);
-            str <<"dB/Oct";
-            stringArray4.add(str);
-        }
-    }
-    
+//    while (choice == 1)
+//    {
+//
+//        for (int i = 0; i < 8 ; i+=2)
+//        {
+//            juce::String str;
+//            str << (12 + i*6);
+//            str <<"dB/Oct";
+//            stringArray3.add(str);
+//        }
+//
+//    }
+
+    layout.add(std::make_unique<juce::AudioParameterChoice>("Filter Slope","Filter Slope",stringArray3,0));
     return layout;
 }
 
