@@ -27,6 +27,7 @@ struct ChainSettings
     float freq {0};
     Slope slope{Slope::Slope_6};
     int type {0};
+    int fType{0};
 };
 
 ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts);
@@ -74,7 +75,7 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     
-  static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     
     
     juce::AudioProcessorValueTreeState apvts {*this,nullptr,"Parameters",createParameterLayout()};

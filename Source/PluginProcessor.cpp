@@ -116,10 +116,7 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
     leftFilter.setBypassed<1>(true);
     leftFilter.setBypassed<2>(true);
     leftFilter.setBypassed<3>(true);
-    leftFilter.setBypassed<4>(true);
-    leftFilter.setBypassed<5>(true);
-    leftFilter.setBypassed<6>(true);
-    leftFilter.setBypassed<7>(true);
+
 
     auto& rightFilter = rightChain.get<ChainPositions::MyFilter>();
 
@@ -127,10 +124,7 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
     rightFilter.setBypassed<1>(true);
     rightFilter.setBypassed<2>(true);
     rightFilter.setBypassed<3>(true);
-    rightFilter.setBypassed<4>(true);
-    rightFilter.setBypassed<5>(true);
-    rightFilter.setBypassed<6>(true);
-    rightFilter.setBypassed<7>(true);
+
 
 
     if (chainSettings.type == 0)
@@ -353,7 +347,7 @@ void FilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
                 *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
                 leftFilter.setBypassed<1>(false);
                 *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
-
+                leftFilter.setBypassed<2>(false);
             break;
             }
             case Slope_42:
@@ -516,9 +510,9 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     
     auto chainSettings = getChainSettings(apvts);
 
-    auto highPassCoefficients = (juce::dsp::FilterDesign<float>::designIIRHighpassHighOrderButterworthMethod(chainSettings.freq,
+    auto highPassCoefficients =juce::dsp::FilterDesign<float>::designIIRHighpassHighOrderButterworthMethod(chainSettings.freq,
                                                                                                         getSampleRate(),
-                                                                                                        (chainSettings.slope + 1)));
+                                                                                                        (chainSettings.slope + 1));
     
     
 
@@ -536,10 +530,6 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     leftFilter.setBypassed<1>(true);
     leftFilter.setBypassed<2>(true);
     leftFilter.setBypassed<3>(true);
-    leftFilter.setBypassed<4>(true);
-    leftFilter.setBypassed<5>(true);
-    leftFilter.setBypassed<6>(true);
-    leftFilter.setBypassed<7>(true);
 
     auto& rightFilter = rightChain.get<ChainPositions::MyFilter>();
 
@@ -547,10 +537,7 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     rightFilter.setBypassed<1>(true);
     rightFilter.setBypassed<2>(true);
     rightFilter.setBypassed<3>(true);
-    rightFilter.setBypassed<4>(true);
-    rightFilter.setBypassed<5>(true);
-    rightFilter.setBypassed<6>(true);
-    rightFilter.setBypassed<7>(true);
+
 
    
     if (chainSettings.type == 0)
@@ -578,8 +565,6 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             leftFilter.setBypassed<0>(false);
             *leftFilter.get<1>().coefficients = *highPassCoefficients[1];
             leftFilter.setBypassed<1>(false);
-//            *leftFilter.get<2>().coefficients = *highPassCoefficients[2];
-//            leftFilter.setBypassed<2>(false);
 
         break;
         }
@@ -777,7 +762,7 @@ void FilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
                 *leftFilter.get<1>().coefficients = *lowPassCoefficients[1];
                 leftFilter.setBypassed<1>(false);
                 *leftFilter.get<2>().coefficients = *lowPassCoefficients[2];
-
+                leftFilter.setBypassed<2>(false);
             break;
             }
             case Slope_42:
@@ -936,6 +921,7 @@ ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts)
    settings.freq = apvts.getRawParameterValue("Freq") ->load();
    settings.type = apvts.getRawParameterValue("HP/LP") ->load();
    settings.slope = static_cast<Slope>(apvts.getRawParameterValue("Filter Slope") ->load());
+    settings.fType = apvts.getRawParameterValue("Filter Id") ->load();
     return settings;
 }
 
@@ -949,18 +935,23 @@ juce::AudioProcessorValueTreeState::ParameterLayout
                                                            juce::NormalisableRange<float>(20.f,20000.f,1.f,1.f),
                                                            1000.f));// Fiter Frequency Parameter
     
+    juce::StringArray stringArray4;
+    stringArray4.add("Butterworth");
+    stringArray4.add("Linkwitz-Riley");
+    
+    layout.add(std::make_unique<juce::AudioParameterChoice>("Filter Id", "Filter Id", stringArray4, 0));
+    
+    
     juce::StringArray stringArray1;
     stringArray1.add("High Pass");
     stringArray1.add("Low Pass");
    
     layout.add(std::make_unique<juce::AudioParameterChoice>("HP/LP","HP/LP",stringArray1,0)); // Filter Type parameter
+
     
-
-
     juce::StringArray stringArray3;
-
-    {
-
+    
+    
         for (int i = 0; i < 8 ; ++i)
         {
             juce::String str;
@@ -968,11 +959,22 @@ juce::AudioProcessorValueTreeState::ParameterLayout
             str <<"dB/Oct";
             stringArray3.add(str);
         }
-
+    
+    juce::StringArray stringArray5;
+    for (int i = 0; i < 8 ; i+=2)
+    {
+        juce::String str;
+        str << (12 + i*6);
+        str <<"dB/Oct";
+        stringArray5.add(str);
     }
-
-    layout.add(std::make_unique<juce::AudioParameterChoice>("Filter Slope","Filter Slope",stringArray3,0));
+    
+        layout.add(std::make_unique<juce::AudioParameterChoice>("Filter Slope","Filter Slope",stringArray3,0));
+       
+    
     return layout;
+    
+    
 }
 
 //==============================================================================
