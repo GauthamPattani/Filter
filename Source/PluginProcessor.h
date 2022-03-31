@@ -95,6 +95,102 @@ private:
         MyFilter
     };
     
+    
+    using Coefficients = Filter::CoefficientsPtr;
+    static void updateCoefficients(Coefficients & old, const Coefficients& replacements);
+    
+    template <typename ChainType, typename CoefficientType>
+    void updateFilter(ChainType& leftFilter, const CoefficientType& highPassCoefficients, const Slope& slope)
+    {        
+        leftFilter.template setBypassed<0>(true);
+        leftFilter.template setBypassed<1>(true);
+        leftFilter.template setBypassed<2>(true);
+        leftFilter.template setBypassed<3>(true);
+
+        switch (slope)
+        {
+            case Slope_6:
+            {
+                *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
+                leftFilter.template setBypassed<0>(false);
+            break;
+            }
+                
+            case Slope_12:
+            {
+                *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
+                leftFilter.template setBypassed<0>(false);
+                
+
+            break;
+            }
+            case Slope_18:
+            {   *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
+                leftFilter.template setBypassed<0>(false);
+                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
+                leftFilter.template setBypassed<1>(false);
+
+            break;
+            }
+            case Slope_24:
+            {   *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
+                leftFilter.template setBypassed<0>(false);
+                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
+                leftFilter.template setBypassed<1>(false);
+
+
+            break;
+            }
+            case Slope_30:
+            {   *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
+                leftFilter.template setBypassed<0>(false);
+                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
+                leftFilter.template setBypassed<1>(false);
+                *leftFilter.template get<2>().coefficients = *highPassCoefficients[2];
+                leftFilter.template setBypassed<2>(false);
+
+
+            break;
+            }
+            case Slope_36:
+            {   *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
+                leftFilter.template setBypassed<0>(false);
+                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
+                leftFilter.template setBypassed<1>(false);
+                *leftFilter.template get<2>().coefficients = *highPassCoefficients[2];
+                leftFilter.template setBypassed<2>(false);
+
+
+            break;
+            }
+            case Slope_42:
+            {   *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
+                leftFilter.template setBypassed<0>(false);
+                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
+                leftFilter.template setBypassed<1>(false);
+                *leftFilter.template get<2>().coefficients = *highPassCoefficients[2];
+                leftFilter.template setBypassed<2>(false);
+                *leftFilter.template get<3>().coefficients = *highPassCoefficients[3];
+                leftFilter.template setBypassed<3>(false);
+
+
+            break;
+            }
+            case Slope_48:
+            { *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
+                leftFilter.template setBypassed<0>(false);
+                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
+                leftFilter.template setBypassed<1>(false);
+                *leftFilter.template get<2>().coefficients = *highPassCoefficients[2];
+                leftFilter.template setBypassed<2>(false);
+                *leftFilter.template get<3>().coefficients = *highPassCoefficients[3];
+                leftFilter.template setBypassed<3>(false);
+
+            break;
+            }
+                }
+    }
+    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FilterAudioProcessor)
 };
