@@ -65,7 +65,7 @@
           uiLastY_Normal="210" uiopen_Normal="0">
     <PLUGIN name="SimpleEQ" format="AudioUnit" category="Effect" manufacturer="AudioAcademy"
             version="1.0.0" file="AudioUnit:Effects/aufx,Zpqa,Manu" uniqueId="7664796c"
-            isInstrument="0" fileTime="0" infoUpdateTime="17fcffa6b81" numInputs="2"
+            isInstrument="0" fileTime="0" infoUpdateTime="17fde82e512" numInputs="2"
             numOutputs="2" isShell="0" uid="7664796c"/>
     <STATE>790.hAGaoMGcv.C1AHv.DTfAGfPBJrvDTTgEWvUag4VclE1XzUmbkIGUjEFcgwUYrUVak4Fcs3VXsU1UyUmXzkGbkckckI2bo8laTQWdvU1WP7fZ0MVYPwVcmklaSQWXzUFUtEVakIQSg4VcOAAY..............vBT.e2Y3C7yyDEwKAH+....TgcIc7O.B..srWanB.....LK1hB.....PyVp4aO55BiRoYWY.....fWUn1h.....D1iQjE.....lsQ4X9Cf...Zf6wo.....HMCM3PDQESTxD8CPDELUkjavUGcQ+fDV8TczAWczIgVvEWXP.fDgUmY38TDA7KTgIWXsUFckI2b..P.K.UPRETS.Df.oQF.A3PAHk1YnMTczAhQxUVb.XWXrUWY.DPBD.......HNMP..UPRETS.Df.oQF.A7PAHk1YnMTczAxTr8FbkAfcgwVckAP.IP.............TAIUPMAP.BjFY.DPCEvza2MTczAhQxUVb.XWXrUWY.DPBD........PCP..UPRETS.Df.oQF.A3PAL81cCUGcfLEauAWY.XWXrUWY.DPBD.............UPRETS.Df.oQF.ArPAPUVXqAhQxUVb.XWXrUWY.DPBD........8HP..UPRETS.Df.oQF.ArPAPUVXqAxQgkla.XWXrUWY.DPBD.............UPRETS.Df.oQF.A3PAPUVXqART0EFaoQWd.XWXrUWY.DPBD.........+O..UPRETS.DP.oQF.AHQAA4VXrkmdkIGHE4VXhwVYjA..PEjTA0D.ADPZjAP.RT.RocFZCUGcfHTdvE1byUFY...TAIUPMAP.AjFY.DPDEvza2MTczAhP4AWXyMWYjA..PEjTA0D.ADPZjAP.OT.TkE1ZfHTdvE1byUFY...VU4FcoQGakQF.H.PF.XB.q..N..D.HAPS.7E.jAPZ..M.UCv0.jM.bCf2.PN.mCf6.LO.0Cf9BzK.......f.A..........F..................f.FC</STATE>
     <LAYOUT>
@@ -78,10 +78,10 @@
     </LAYOUT>
   </FILTER>
   <FILTER uid="6" x="0.52625" y="0.4019230769230769" uiLastX_Normal="980"
-          uiLastY_Normal="514" uiopen_Normal="1">
+          uiLastY_Normal="514" uiopen_Normal="0">
     <PLUGIN name="AUAudioFilePlayer" format="AudioUnit" category="Generator"
             manufacturer="Apple" version="1.6.0" file="AudioUnit:Generators/augn,afpl,appl"
-            uniqueId="6163676e" isInstrument="0" fileTime="0" infoUpdateTime="17fcffa6b81"
+            uniqueId="6163676e" isInstrument="0" fileTime="0" infoUpdateTime="17fde82e512"
             numInputs="0" numOutputs="2" isShell="0" uid="6163676e"/>
     <STATE>554.hAGaoMGcv.C1AHv.DTfAGfPBJr.Gc3wGgvUag4VclE1XzUmbkIGUjEFcg8EDarVPUAkbkMWYzAUYxMWZyQWYtQ2TzEFcksTY4c0b0IFc4AWYWYWYxMWZu4FUzkGbk8EDOXVZrUVKxUlYkIWYtMVYyQkag0VYRDFbvwFPgxvzM3vCPDQFXYTZrUlSg0VYWIUYmk1atMmWIM2TkwVYiQWYjYTZrU1WPvyKUMWYxM2KgUGYo8VXiEFYk0VduPza24FauEFYy8hSgQWcxEFark2WFUGar8ETxUlcoU1cffRLo3RavMSnRP8DTTgEWfQFZ3kTkcVZu4FQuU1bL81avokTkcVZu4FQgQWXeAADIM2TkwVYiQWYjIUYmk1atokTkcVZu4lSg0VYH7DDvA..........P9yx...X...PPZB...F....OHTP......vCBED.....fyA0.A...............A...............................................lwk.GA...........xUt.3NYZNdBZ4TY2AhTkcVZu4VBRDlYvwFD.HQX0claQCBDVYTZrUFHwfUUtQWZzwVYjA.B.jA.l.vJ.jD.QAPV.3E.vAPc.nG.6APe.PH.MBPk.PJ.iCP4.3N.8G.BArQ.lDvIAnY.aFfoAbZ.rFfqALa.1FPu........BD..........h...................AXL</STATE>
     <LAYOUT>
@@ -91,13 +91,13 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="7" x="0.6899999999999999" y="0.5826923076923077" uiLastX_Normal="238"
-          uiLastY_Normal="609" uiopen_Normal="1">
+  <FILTER uid="7" x="0.82875" y="0.5846153846153846" uiLastX_Normal="216"
+          uiLastY_Normal="577" uiopen_Normal="1">
     <PLUGIN name="Filter" format="AudioUnit" category="Effect" manufacturer="AudioAcademy"
             version="1.0.0" file="AudioUnit:Effects/aufx,Ceul,Manu" uniqueId="6f717d61"
-            isInstrument="0" fileTime="0" infoUpdateTime="17fcffa6b81" numInputs="2"
+            isInstrument="0" fileTime="0" infoUpdateTime="17fde82e512" numInputs="2"
             numOutputs="2" isShell="0" uid="6f717d61"/>
-    <STATE>229.hAGaoMGcv.y0AHv.DTfAGfPBJHwDTTAWsEla0YVXiQWcxUlbTQVXzEFWkwVYsUlaz0hag0VYWMWchQWdvU1U1Ulbyk1atQEc4AWYT4VXsUlDMEla08DDj...............C.PHJhYOHcNpDrwrqC.....La7w......H8BLz.DQESTxDsCODELUkjavUGcQ6PDV8TczAWczIwPkUGaP.fDgUmY3gUUtQWZzwVYjgvEjjhM9XzRPUEeANXgHpHjSp4mgZJ.......P.A.........fE....................uB</STATE>
+    <STATE>237.hAGaoMGcv.y0AHv.DTfAGfPBJHwDTTAWsEla0YVXiQWcxUlbTQVXzEFWkwVYsUlaz0hag0VYWMWchQWdvU1U1Ulbyk1atQEc4AWYT4VXsUlDMEla08DDr...............D.PHJhoOvOOSDrwrqC.....La7w......HD5BNL.....Ru.CM.QTwDkLQ6vCQASUI4Fb0QWzNDgUOUGcvUGcRLTY0wFD.HQX0YFdXUkazkFcrUFYHbAIoXiOFsDTUQXhK1HjRh4lhdZptB.......DP..........XA...................vs</STATE>
     <LAYOUT>
       <INPUTS>
         <BUS index="0" layout="L R"/>
@@ -107,8 +107,38 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <CONNECTION srcFilter="6" srcChannel="0" dstFilter="7" dstChannel="0"/>
-  <CONNECTION srcFilter="6" srcChannel="1" dstFilter="7" dstChannel="1"/>
-  <CONNECTION srcFilter="7" srcChannel="0" dstFilter="3" dstChannel="0"/>
-  <CONNECTION srcFilter="7" srcChannel="1" dstFilter="3" dstChannel="1"/>
+  <FILTER uid="8" x="0.835" y="0.4096153846153846">
+    <PLUGIN name="EQ Curve Analyzer" format="AudioUnit" category="Effect"
+            manufacturer="Bertom" version="1.2.0" file="AudioUnit:Effects/aufx,EQCA,BRTM"
+            uniqueId="66767174" isInstrument="0" fileTime="0" infoUpdateTime="17fde82e512"
+            numInputs="2" numOutputs="2" isShell="0" uid="66767174"/>
+    <STATE>743.hAGaoMGcv.C1AHv.DTfAGfPBJrvDTTgEWvUag4VclE1XzUmbkIGUjEFcgwUYrUVak4Fcs3VXsU1UyUmXzkGbkckckI2bo8laTQWdvU1WP7fZ0MVYPwVcmklaSQWXzUFUtEVakIgPRQUSOAAW..............fB.3Q0u9Cf...AN3+W.....PvVvKbOi6XNQT4ztB.....JDfs2.....TyiT5G.....cMR879ybLWkZ87rp7baQ0HWWbngOLyby8kQD9+CSL2rzLzfCQDULQISzO.QTvTURtAWczE8CRX0S0QGb0QmDEE0PAAA.RDVclg2SQD.lPElbg0VYzUlbyA..An.TAIUPMAP.BjFY.DfAEDTUT8D.1EFa0UF.Aj.A........v+C.PEjTA0D.AHPZjAP.JTfQFQ0SRQTQRAfcgwVckAP.IP.........J.A.TAIUPMAP.BjFY.D.BEbTQN8TUTAfcgwVckAP.IP.........J.C.TAIUPMAP.BjFY.DvAEbjTOUET.XWXrUWY.DPBD.........+O..UPRETS.Df.oQF.AjPALEDUE4zPYAfcgwVckAP.IP.............TAIUPMAP.BjFY.DvAEzTPXQjP.XWXrUWY.DPBD........fBP..UPRETS.Df.oQF.AjPAMEDVFIUQQAfcgwVckAP.IP.......f3z.A.TAIUPMAP.BjFY.DPBEzTRNYjTEEE.1EFa0UF.Aj.A........9.D.PEjTA0D.AHPZjAP.HTvTEQ0QE4D.1EFa0UF.Aj.A........v+C.PEjTA0D.AHPZjAP.KTvTH8zUPgTPSUD.1EFa0UF.Aj.A............XUkazkFcrUFY.f..Y.fI.rB.3..P.fD.MAvW.PF.oA.x.zL.OCPz.PM.VC.2.7M.lCv5.zN.xKfi........BD..........X...................BbI</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="L R"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="9" x="0.84" y="0.7538461538461538">
+    <PLUGIN name="EQ Curve Analyzer" format="AudioUnit" category="Effect"
+            manufacturer="Bertom" version="1.2.0" file="AudioUnit:Effects/aufx,EQCA,BRTM"
+            uniqueId="66767174" isInstrument="0" fileTime="0" infoUpdateTime="17fde82e513"
+            numInputs="2" numOutputs="2" isShell="0" uid="66767174"/>
+    <STATE>743.hAGaoMGcv.C1AHv.DTfAGfPBJrvDTTgEWvUag4VclE1XzUmbkIGUjEFcgwUYrUVak4Fcs3VXsU1UyUmXzkGbkckckI2bo8laTQWdvU1WP7fZ0MVYPwVcmklaSQWXzUFUtEVakIgPRQUSOAAW..............fB.3Q0u9Cf...AN3+W.....PvVvKbOi6XNQT4ztB.....JDfs2.....TyiT5G.....cMR879ybLWkZ87rp7baQ0HWWbngOLyby8kQD9+CSL2rzLzfCQDULQISzO.QTvTURtAWczE8CRX0S0QGb0QmDEE0PAAA.RDVclg2SQD.lPElbg0VYzUlbyA..An.TAIUPMAP.BjFY.DfAEDTUT8D.1EFa0UF.Aj.A........v+C.PEjTA0D.AHPZjAP.JTfQFQ0SRQTQRAfcgwVckAP.IP.........J.A.TAIUPMAP.BjFY.D.BEbTQN8TUTAfcgwVckAP.IP.........J.C.TAIUPMAP.BjFY.DvAEbjTOUET.XWXrUWY.DPBD.........+O..UPRETS.Df.oQF.AjPALEDUE4zPYAfcgwVckAP.IP.............TAIUPMAP.BjFY.DvAEzTPXQjP.XWXrUWY.DPBD........fBP..UPRETS.Df.oQF.AjPAMEDVFIUQQAfcgwVckAP.IP.......f3z.A.TAIUPMAP.BjFY.DPBEzTRNYjTEEE.1EFa0UF.Aj.A........9.D.PEjTA0D.AHPZjAP.HTvTEQ0QE4D.1EFa0UF.Aj.A............PEjTA0D.AHPZjAP.KTvTH8zUPgTPSUD.1EFa0UF.Aj.A............XUkazkFcrUFY.f..Y.fI.rB.3..P.fD.MAvW.PF.oA.x.zL.OCPz.PM.VC.2.7M.lCv5.zN.xKfi........BD..........X...................BbI</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="L R"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <CONNECTION srcFilter="7" srcChannel="0" dstFilter="9" dstChannel="0"/>
+  <CONNECTION srcFilter="7" srcChannel="1" dstFilter="9" dstChannel="1"/>
+  <CONNECTION srcFilter="8" srcChannel="0" dstFilter="7" dstChannel="0"/>
+  <CONNECTION srcFilter="8" srcChannel="1" dstFilter="7" dstChannel="1"/>
 </FILTERGRAPH>

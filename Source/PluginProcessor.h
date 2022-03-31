@@ -97,11 +97,17 @@ private:
     
     
     using Coefficients = Filter::CoefficientsPtr;
-    static void updateCoefficients(Coefficients & old, const Coefficients& replacements);
+    static void updateCoefficients(Coefficients& old, const Coefficients& replacements);
     
+    template <int Index, typename ChainType, typename CoefficientType>
+    void update(ChainType& chain, const CoefficientType& coefficients)
+    {
+        updateCoefficients(chain.template get<Index>().coefficients,coefficients[Index]);
+        chain.template setBypassed<Index>(false);
+    }
     template <typename ChainType, typename CoefficientType>
     void updateFilter(ChainType& leftFilter, const CoefficientType& highPassCoefficients, const Slope& slope)
-    {        
+    {
         leftFilter.template setBypassed<0>(true);
         leftFilter.template setBypassed<1>(true);
         leftFilter.template setBypassed<2>(true);
@@ -109,88 +115,50 @@ private:
 
         switch (slope)
         {
-            case Slope_6:
+            case Slope_48:
             {
-                *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
-                leftFilter.template setBypassed<0>(false);
-            break;
-            }
+                update<3>(leftFilter, highPassCoefficients);
                 
-            case Slope_12:
-            {
-                *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
-                leftFilter.template setBypassed<0>(false);
-                
-
-            break;
-            }
-            case Slope_18:
-            {   *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
-                leftFilter.template setBypassed<0>(false);
-                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
-                leftFilter.template setBypassed<1>(false);
-
-            break;
-            }
-            case Slope_24:
-            {   *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
-                leftFilter.template setBypassed<0>(false);
-                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
-                leftFilter.template setBypassed<1>(false);
-
-
-            break;
-            }
-            case Slope_30:
-            {   *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
-                leftFilter.template setBypassed<0>(false);
-                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
-                leftFilter.template setBypassed<1>(false);
-                *leftFilter.template get<2>().coefficients = *highPassCoefficients[2];
-                leftFilter.template setBypassed<2>(false);
-
-
-            break;
             }
             case Slope_36:
-            {   *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
-                leftFilter.template setBypassed<0>(false);
-                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
-                leftFilter.template setBypassed<1>(false);
-                *leftFilter.template get<2>().coefficients = *highPassCoefficients[2];
-                leftFilter.template setBypassed<2>(false);
-
-
-            break;
+            {
+                update<2>(leftFilter, highPassCoefficients);
+                
+            }
+            case Slope_24:
+            {
+                update<1>(leftFilter, highPassCoefficients);
+                
+            }
+            case Slope_12:
+            {
+                update<0>(leftFilter, highPassCoefficients);
+                break;
             }
             case Slope_42:
-            {   *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
-                leftFilter.template setBypassed<0>(false);
-                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
-                leftFilter.template setBypassed<1>(false);
-                *leftFilter.template get<2>().coefficients = *highPassCoefficients[2];
-                leftFilter.template setBypassed<2>(false);
-                *leftFilter.template get<3>().coefficients = *highPassCoefficients[3];
-                leftFilter.template setBypassed<3>(false);
-
-
-            break;
+            {
+                update<3>(leftFilter, highPassCoefficients);
+                
             }
-            case Slope_48:
-            { *leftFilter.template get<0>().coefficients = *highPassCoefficients[0];
-                leftFilter.template setBypassed<0>(false);
-                *leftFilter.template get<1>().coefficients = *highPassCoefficients[1];
-                leftFilter.template setBypassed<1>(false);
-                *leftFilter.template get<2>().coefficients = *highPassCoefficients[2];
-                leftFilter.template setBypassed<2>(false);
-                *leftFilter.template get<3>().coefficients = *highPassCoefficients[3];
-                leftFilter.template setBypassed<3>(false);
-
-            break;
+            case Slope_30:
+            {
+                update<2>(leftFilter, highPassCoefficients);
+                
             }
-                }
+            case Slope_18:
+            {
+                update<1>(leftFilter, highPassCoefficients);
+                
+            }
+            case Slope_6:
+            {
+                update<0>(leftFilter, highPassCoefficients);
+                break;
+            }
+                
+                
     }
-    
+}
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FilterAudioProcessor)
 };
